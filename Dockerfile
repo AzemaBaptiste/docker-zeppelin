@@ -18,6 +18,8 @@ RUN set -ex \
     numpy \
     pandasql \
     scipy \
+    geopy \
+    nltk \
  ' \
  && pip3 install $packages \
  && apt-get purge -y --auto-remove $buildDeps \
