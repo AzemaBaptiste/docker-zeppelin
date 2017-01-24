@@ -14,14 +14,18 @@ RUN set -ex \
     wget \
     liblapack-dev \
     libopenblas-dev \
+    git \
  && packages=' \
     numpy \
     pandasql \
     scipy \
     geopy \
     nltk \
+    scikit-learn \
+    sparkit-learn \
  ' \
  && pip3 install $packages \
+ && pip3 install --upgrade git+https://github.com/lensacom/sparkit-learn.git \
  && apt-get purge -y --auto-remove $buildDeps \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
