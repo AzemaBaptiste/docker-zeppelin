@@ -1,4 +1,4 @@
-FROM gettyimages/spark:2.1.1-hadoop-2.7
+FROM gettyimages/spark:2.2.1-hadoop-2.7
 
 # SciPy
 RUN set -ex \
@@ -26,6 +26,7 @@ RUN set -ex \
  ' \
  && pip3 install $packages \
  && pip3 install --upgrade git+https://github.com/lensacom/sparkit-learn.git \
+ && rm -rf /root/.cache/pip \
  && apt-get purge -y --auto-remove $buildDeps \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
@@ -35,7 +36,7 @@ ENV ZEPPELIN_PORT 8080
 ENV ZEPPELIN_HOME /usr/zeppelin
 ENV ZEPPELIN_CONF_DIR $ZEPPELIN_HOME/conf
 ENV ZEPPELIN_NOTEBOOK_DIR $ZEPPELIN_HOME/notebook
-ENV ZEPPELIN_COMMIT v0.7.2
+ENV ZEPPELIN_COMMIT v0.7.3
 RUN echo '{ "allow_root": true }' > /root/.bowerrc
 RUN set -ex \
  && buildDeps=' \
@@ -61,6 +62,7 @@ RUN set -ex \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /usr/src/zeppelin \
  && rm -rf /root/.m2 \
+ && rm -rf /root/.cache/bower \
  && rm -rf /root/.npm \
  && rm -rf /tmp/*
 
